@@ -1,0 +1,9 @@
+.App {
+    width: 40%;
+    border: 0.2rem solid #df2381;
+    border-radius: 8px 8px 8px 8px;
+    padding: 10px; 
+    position: absolute;
+    top: 10%;
+    left: 30%;
+  } 
