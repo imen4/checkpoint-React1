@@ -1,7 +1,3 @@
-.parent{
-    height: 100vh; /*100vh height entire body*/
-
-}
- body{
+body{
   background-color: aquamarine;
-} 
+}    
