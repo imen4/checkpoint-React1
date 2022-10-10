@@ -1,1 +1,7 @@
-    
+.container{  
+    text-align: center;  
+    border: 7px solid red;  
+    width: 400px;  
+    height: 500px;  
+    padding-top: 10px;  
+    }  
