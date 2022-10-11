@@ -12,26 +12,26 @@ class App extends React.Component {
       profession: "developer 💻",
     },
     show: false,
+    count1:0,
     count: 0, intervalId: 0
   }
   /*handlerClick = () => {
     this.setState((currentState) => ({ show: !currentState.show }))
   }*/
-  /*componentDidMount() {
-    this.intervalId  = setInterval(
+  componentDidMount() {
+    this.intervalId1  = setInterval(
       () => {
         this.setState(prevState => {
           return {
-            count: prevState.count + 1,
+            count1: prevState.count1 + 1,
           };
         });
       }, 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId );
-    console.log(this.intervalId)
-  }*/
+    clearInterval(this.intervalId1 );
+  }
   handleClick2 = () => {
     this.setState((currentState) => ({ show: !currentState.show }))
     if(this.state.intervalId){
@@ -65,6 +65,8 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
+        <h2>The component has been rendered for {this.state.count1} seconds</h2>
       <div className="container">
         <Button onClick={this.handleClick2} variant="primary">
           {this.state.show ? "hide" : "show"}
@@ -76,13 +78,18 @@ class App extends React.Component {
               <span>Bio: {this.state.Person.bio}</span>
             </div>
             <span>Profession: {this.state.Person.profession}</span>
+            <div>
             <img src={anime} alt="anime" width={200} />
+            </div>
+            <h2>The component has been rendered for {this.state.count} seconds</h2>
           </div>
         )}
-          <h2>The component has been rendered for {this.state.count} seconds</h2>
+                    
           {/* <button onClick={this.handleClick2}>
             {this.state.intervalId? "Stop counter": "Start counter"}
           </button> */}
+          </div>
+          
       </div>
     );
   }
