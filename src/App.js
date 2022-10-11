@@ -32,12 +32,6 @@ class App extends React.Component {
     clearInterval(this.intervalId );
   }
 
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
   render() {
     return (
       <div className="container">
