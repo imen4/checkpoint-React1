@@ -12,12 +12,12 @@ class App extends React.Component {
       profession: "developer 💻",
     },
     show: false,
-    count: 0
+    count: 0, intervalId: 0
   }
-  handlerClick = () => {
+  /*handlerClick = () => {
     this.setState((currentState) => ({ show: !currentState.show }))
-  }
-  componentDidMount() {
+  }*/
+  /*componentDidMount() {
     this.intervalId  = setInterval(
       () => {
         this.setState(prevState => {
@@ -30,13 +30,43 @@ class App extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalId );
+    console.log(this.intervalId)
+  }*/
+  handleClick2 = () => {
+    this.setState((currentState) => ({ show: !currentState.show }))
+    if(this.state.intervalId){
+      clearInterval(this.state.intervalId);
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          intervalId: 0,
+          count:0,
+        };
+      });
+      console.log(this.state.intervalId)
+      return;
+    }
+    const newIntervalId = setInterval(() => {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          count: prevState.count + 1,
+        };
+      });
+    }, 1000);
+    
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        intervalId: newIntervalId,
+      };
+    });
   }
 
   render() {
     return (
       <div className="container">
-        <Button onClick={this.handlerClick} variant="primary">
-          {" "}
+        <Button onClick={this.handleClick2} variant="primary">
           {this.state.show ? "hide" : "show"}
         </Button>
         {this.state.show && (
@@ -50,6 +80,9 @@ class App extends React.Component {
           </div>
         )}
           <h2>The component has been rendered for {this.state.count} seconds</h2>
+          {/* <button onClick={this.handleClick2}>
+            {this.state.intervalId? "Stop counter": "Start counter"}
+          </button> */}
       </div>
     );
   }
