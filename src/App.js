@@ -1,74 +1,59 @@
 import "./App.css";
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, { Component } from 'react'
+import TodoList from "./components/TodoList";
+import AddTodo from "./components/AddTodo";
 
-class App extends React.Component {
-  constructor(props){
-    console.log("constructor")
-    super(props);
+export default class App extends Component {
+  constructor(){
+    super()
     this.state={
-      count:0,
-      isShow:true,
-      interval:0,
-      timer:0
+      todos:[
+        {
+          id:0,
+          title:"Wake Up",
+          isDone:false
+        },
+        {
+          id:1,
+          title:"Go to work",
+          isDone:false
+        },
+        {
+          id:2,
+          title:"Go to eat",
+          isDone:false
+        }
+      ]
 
-    };
-  }
-  increment=()=>{
-    this.setState({count:this.state.count+1}) 
     }
-  /*componentDidMount(){
-    this.setState({
-      interval:setInterval(() => {
-      this.setState({timer:this.state.timer+1})
-    }, 1000)
-  })
-    console.log("componentDidMout")
-  }*/
-  componentDidUpdate(){
-    console.log("componentDidUpdate")
   }
- /* componentWillUnmount(){
-    clearInterval(this.state.interval);
-  }*/
-  handleClick2 = () => {
-    if(this.state.interval){
-      clearInterval(this.state.interval);
-      this.setState({
-          interval: 0,
-          timer:0
-      });
-      return;
+  done=(id)=>{
+  this.setState({todos: this.state.todos.map((el)=>{
+    //console.log(id)
+    if (el.id===id){
+      el.isDone=!el.isDone
+    }return el
+  })})
+  }
+  delTodo=(id)=>{
+this.setState({todos:this.state.todos.filter((el)=>
+  el.id!==id
+  )})
+  }
+  addTodo=(title)=>{
+    const newTodo={
+      id:Math.random(),
+      title:title,
+      isDone:false
     }
-    this.setState({
-      interval:setInterval(() => {
-      this.setState({timer:this.state.timer+1})
-    }, 1000)
-  })
-      };
+    this.setState({todos:[...this.state.todos,newTodo]})
+  }
   render() {
-    console.log("render")
-    console.log("isShow",this.state.isShow)
     return (
       <div>
-        <Button onClick={()=>{this.setState({isShow: !this.state.isShow})}}>{this.state.isShow? "hide":"show"}</Button>
-        {this.state.isShow? (<div>
-        <Button onClick={this.increment}>+</Button>
-        <h3>{this.state.count}</h3>
-        <Button onClick= {()=>{this.setState({count:this.state.count-1})} }>-</Button>
-        <div style={{marginTop:"10px"}}>
-        <Button onClick= {()=>{this.setState({count:0})}} >Reset</Button>
-        <div>
-        <Button onClick={this.handleClick2}> {this.state.interval? "Stop counter": "Start counter"}</Button>
-        </div>
-       
-        </div>
-        <h1>{this.state.timer}</h1>
-        </div>): (<></>)}
-        
+        <AddTodo addTodo={this.addTodo}/>
+        <TodoList todos={this.state.todos} done={this.done} delTodo={this.delTodo}/>
       </div>
-    );
+    )
   }
 }
-
-export default App;
